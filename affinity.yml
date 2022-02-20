@@ -19,7 +19,7 @@ pipelines:
             - name: ag_step_1
         execution:
           onExecute:
-            - echo "Running "
+            - cat $MY_DIR/myoutput.txt
       - name: ag_step_3
         type: Bash
         configuration:
