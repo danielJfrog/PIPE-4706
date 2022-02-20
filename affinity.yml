@@ -12,7 +12,7 @@ pipelines:
             - mkdir $MY_DIR
             - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
             - cat $MY_DIR/myoutput.txt
-      - name: ag_step_2
+      - name: bad
         type: Bash
         configuration:
           inputSteps:
@@ -25,7 +25,7 @@ pipelines:
         configuration:
           affinityGroup: together
           inputSteps:
-            - name: ag_step_1
+            - name: bad
         execution:
           onExecute:
             - cat $MY_DIR/myoutput.txt
