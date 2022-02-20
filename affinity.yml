@@ -8,6 +8,7 @@ pipelines:
       - name: ag_step_1
         type: Bash
         configuration:
+          affinityGroup: together
         execution:
           onExecute:
             - mkdir $MY_DIR
@@ -15,6 +16,7 @@ pipelines:
             - cat $MY_DIR/myoutput.txt
       - name: bad
         type: Bash
+        configuration:
           inputSteps:
             - name: ag_step_1
         execution:
@@ -23,6 +25,7 @@ pipelines:
       - name: ag_step_3
         type: Bash
         configuration:
+          affinityGroup: together
           inputSteps:
             - name: bad
         execution:
