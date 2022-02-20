@@ -14,8 +14,6 @@ pipelines:
             - cat $MY_DIR/myoutput.txt
       - name: bad
         type: Bash
-        configuration:
-          affinityGroup: together
           inputSteps:
             - name: ag_step_1
         execution:
