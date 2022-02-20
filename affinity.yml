@@ -22,12 +22,3 @@ pipelines:
         execution:
           onExecute:
             - echo "Running "
-      - name: bad
-        type: Bash
-        configuration:
-          affinityGroup: together
-          inputSteps:
-            - name: ag_step_2
-        execution:
-          onExecute:
-            - echo "Running "
