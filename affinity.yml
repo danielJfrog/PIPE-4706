@@ -7,6 +7,8 @@ pipelines:
     steps:
       - name: ag_step_1
         type: Bash
+        configuration:
+          affinityGroup: together
         execution:
           onExecute:
             - mkdir $MY_DIR
