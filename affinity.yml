@@ -21,7 +21,7 @@ pipelines:
             - name: ag_step_1
         execution:
           onExecute:
-            - cat $MY_DIR/myoutput.txt
+            - echo "Running "
       - name: bad
         type: Bash
         configuration:
@@ -30,4 +30,4 @@ pipelines:
             - name: ag_step_2
         execution:
           onExecute:
-            - cat $MY_DIR/myoutput.txt
+            - echo "Running "
