@@ -16,8 +16,6 @@ pipelines:
         type: Bash
         configuration:
           affinityGroup: together
-          inputSteps:
-            - name: ag_step_1
         execution:
           onExecute:
             - cat $MY_DIR/myoutput.txt
