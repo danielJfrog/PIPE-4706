@@ -32,10 +32,3 @@ pipelines:
         execution:
           onExecute:
             - cat $MY_DIR/myoutput.txt
-      - name: ag_step_3
-        type: Bash
-        configuration:
-          affinityGroup: together
-        execution:
-          onExecute:
-            - cat $MY_DIR/myoutput.txt
