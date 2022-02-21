@@ -18,7 +18,7 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: ag_step_1
+            - name: ag_step_2
         execution:
           onExecute:
             - cat $MY_DIR/myoutput.txt
