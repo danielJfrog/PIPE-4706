@@ -7,7 +7,6 @@ pipelines:
     steps:
       - name: ag_step_1
         type: Bash
-        configuration:
         execution:
           onExecute:
             - mkdir $MY_DIR
