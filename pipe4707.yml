@@ -25,5 +25,5 @@ pipelines:
           onStart:
             - restore_pipeline_files my_file cachefile.txt
           onExecute:
-            - echo "Hello world"
+            - echo "Hello world4"
             - cat $MY_DIR/myoutput.txt
