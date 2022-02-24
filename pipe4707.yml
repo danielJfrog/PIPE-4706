@@ -12,7 +12,7 @@ pipelines:
             - mkdir $MY_DIR
             - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
             - cat $MY_DIR/myoutput.txt
-            - touch cachefile.txt
+            - echo "new daniel" > cachefile.txt
             - restore_pipeline_files my_file cachefile.txt
       - name: bad
         type: Bash
