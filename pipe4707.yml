@@ -1,5 +1,5 @@
 pipelines:
-  - name: pipeline_affinityGroup_example2
+  - name: pipeline_affinityGroup_example4
     configuration:
       environmentVariables:
         readOnly:
