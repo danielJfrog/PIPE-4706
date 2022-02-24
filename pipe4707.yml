@@ -13,7 +13,7 @@ pipelines:
             - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
             - cat $MY_DIR/myoutput.txt
             - touch cachefile.txt
-            - add_pipeline_files cachefile.txt my_file
+            - restore_pipeline_files my_file cachefile.txt
       - name: bad
         type: Bash
         configuration:
@@ -24,4 +24,4 @@ pipelines:
             - restore_pipeline_files my_file cachefile.txt
           onExecute:
             - echo "Hello world4"
-            - cat $MY_DIR/cachefile.txt
+            - cat cachefile.txt
