@@ -15,7 +15,7 @@ pipelines:
             - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
             - cat $MY_DIR/myoutput.txt
             - touch foo
-            - restore_pipeline_files myfile cachefile.txt
+            - add_pipeline_files directory/subdirectory my_directory
       - name: bad
         type: Bash
         configuration:
