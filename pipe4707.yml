@@ -23,7 +23,7 @@ pipelines:
             - name: ag_step_1
         execution:
           onStart:
-            - restore_pipeline_files foo
+            - restore_pipeline_files foo foo
           onExecute:
             - echo "Hello world"
             - cat $MY_DIR/myoutput.txt
