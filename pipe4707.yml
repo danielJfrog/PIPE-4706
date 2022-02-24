@@ -13,7 +13,7 @@ pipelines:
             - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
             - cat $MY_DIR/myoutput.txt
             - echo "new daniel" > cachefile.txt
-            - restore_pipeline_files my_file cachefile.txt
+            - add_pipeline_files cachefile.txt my_file
       - name: bad
         type: Bash
         configuration:
