@@ -15,7 +15,7 @@ pipelines:
             - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
             - cat $MY_DIR/myoutput.txt
             - touch foo
-            - add_pipeline_files foo foo
+            - restore_pipeline_files myfile cachefile.txt
       - name: bad
         type: Bash
         configuration:
@@ -23,7 +23,7 @@ pipelines:
             - name: ag_step_1
         execution:
           onStart:
-            - restore_pipeline_files foo foo
+            - restore_pipeline_files my_file cachefile.txt
           onExecute:
             - echo "Hello world"
             - cat $MY_DIR/myoutput.txt
