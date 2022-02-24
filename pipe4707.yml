@@ -8,6 +8,8 @@ pipelines:
       - name: ag_step_1
         type: Bash
         execution:
+          onStart:
+            - restore_pipeline_files foo
           onExecute:
             - mkdir $MY_DIR
             - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
