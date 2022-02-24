@@ -7,6 +7,8 @@ pipelines:
     steps:
       - name: ag_step_1
         type: Bash
+        inputResources:
+          - name: myAppRepo
         execution:
           onExecute:
             - mkdir $MY_DIR
