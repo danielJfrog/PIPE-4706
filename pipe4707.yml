@@ -1,57 +1,33 @@
-template: true   # required for local templates
-valuesFilePath: ./values.yml
-
-resources:
-  - name: myFirstRepo
-    type: GitRepo
-    configuration:
-      # SCM integration where the repository is located
-      gitProvider: {{ .Values.myRepo.gitProvider }} # this will be replaced from values.yml
-      # Repository path, including org name/repo name
-      path: {{ .Values.myRepo.path }} # this will be replaced from values.yml
-      branches:
-        # Specifies which branches will trigger dependent steps
-        include: master
-
-  - name: myPropertyBag
-    type: PropertyBag
-    configuration:
-      commitSha: 1
-      runID: 1
-
 pipelines:
-  - name: my_first_pipeline
+  - name: pipeline_affinityGroup_example
+    configuration:
+      environmentVariables:
+        readOnly:
+          MY_DIR: "/tmpdir"
     steps:
-      - name: p1_s1
+      - name: ag_step_1
         type: Bash
         configuration:
-          inputResources:
-            - name: myFirstRepo
+          affinityGroup: together
         execution:
           onExecute:
-            - echo $res_myFirstRepo_commitSha
-            - add_run_variables current_runid=$run_id
-            - add_run_variables commitSha=$res_myFirstRepo_commitSha
-            - echo "Previous run ID is $prev_runid"
-
-      - name: p1_s2
+            - mkdir $MY_DIR
+            - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
+            - cat $MY_DIR/myoutput.txt
+      - name: bad
         type: Bash
         configuration:
           inputSteps:
-            - name: p1_s1
+            - name: ag_step_1
         execution:
           onExecute:
-            - echo $current_runid
-
-      - name: p1_s3
+            - cat $MY_DIR/myoutput.txt
+      - name: ag_step_3
         type: Bash
         configuration:
+          affinityGroup: together
           inputSteps:
-            - name: p1_s2
-          outputResources:
-            - name: myPropertyBag
+            - name: bad
         execution:
           onExecute:
-            - echo $current_runid
-            - add_pipeline_variables prev_runid=$run_id
-            - write_output myPropertyBag commitSha=$commitSha runID=$current_runid
+            - cat $MY_DIR/myoutput.txt
