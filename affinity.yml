@@ -3,10 +3,6 @@ resources:
   - name: myFirstRepo
     type: GitRepo
     configuration:
-      # SCM integration where the repository is located
-      branches:
-        # Specifies which branches will trigger dependent steps
-        include: master
 
   - name: myPropertyBag
     type: PropertyBag
