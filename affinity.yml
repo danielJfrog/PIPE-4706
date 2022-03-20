@@ -12,8 +12,7 @@ pipelines:
         execution:
           onExecute:
             - mkdir $MY_DIR
-            - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
-            - cat $MY_DIR/myoutput.txt
+            - echo "Running " $pipeline_name "|"
       - name: bad
         type: Bash
         configuration:
@@ -22,7 +21,7 @@ pipelines:
             - name: ag_step_1
         execution:
           onExecute:
-            - cat $MY_DIR/myoutput.txt
+            - echo "Running " $pipeline_name "|"
       - name: ag_step_3
         type: Bash
         configuration:
@@ -31,4 +30,4 @@ pipelines:
             - name: bad
         execution:
           onExecute:
-            - cat $MY_DIR/myoutput.txt
+            - echo "Running " $pipeline_name "|"
