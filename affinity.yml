@@ -1,9 +1,4 @@
 
-resources:
-  - name: myFirstRepo
-    type: GitRepo
-    configuration:
-
   - name: myPropertyBag
     type: PropertyBag
     configuration:
@@ -15,10 +10,6 @@ pipelines:
     steps:
       - name: p1_s1
         type: Bash
-        configuration:
-          inputResources:
-            # Sets up step to be triggered when there are commit events to myFirstRepo
-            - name: myFirstRepo
         execution:
           onExecute:
             # Data from input resources is available as env variables in the step
