@@ -1,12 +1,3 @@
-
-resources:
-  {{ range $i, $e := until 5 }}
-  - name: monitor_cron_trigger{{$i}}
-    type: CronTrigger
-    configuration:
-      interval: '*/5 * * * *' # Every 5 minutes
-  {{ end }}
-
 pipelines:
   - name: pipeline_affinityGroup_example7
     configuration:
@@ -23,3 +14,17 @@ pipelines:
             - cat $MY_DIR/myoutput.txt
             - echo "new daniel" > cachefile.txt
             - add_pipeline_files cachefile.txt my_file
+    {{ range $i, $e := until 5 }}
+      - name: ag_step_{{$i}}
+        type: Bash
+        configuration:
+          inputResources:
+          - name: ag_step_1
+        execution:
+          onExecute:
+            - mkdir $MY_DIR
+            - echo "Running " $pipeline_name "|" $step_name >$MY_DIR/myoutput.txt
+            - cat $MY_DIR/myoutput.txt
+            - echo "new daniel" > cachefile.txt
+            - add_pipeline_files cachefile.txt my_file
+    {{ end }}
