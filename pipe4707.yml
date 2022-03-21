@@ -5,7 +5,8 @@ pipelines:
         readOnly:
           MY_DIR: "/tmpdir"
     steps:
-      - name: ag_step
+    {{ range $i, $e := until 2 }}
+      - name: ag_step_{{$i}}
         type: Bash
         execution:
           onExecute:
@@ -14,3 +15,4 @@ pipelines:
             - cat $MY_DIR/myoutput.txt
             - echo "new daniel" > cachefile.txt
             - add_pipeline_files cachefile.txt my_file
+    {{ end }}
