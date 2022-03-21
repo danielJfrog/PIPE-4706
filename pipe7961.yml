@@ -1,0 +1,35 @@
+pipelines:
+  - name: pipeline_7961
+    configuration:
+      environmentVariables:
+        readOnly:
+          MY_DIR: "/tmpdir"
+    steps:
+      {{ range $i, $e := until 2 }}
+      - name: ag_step_{{$i}}
+        type: Bash
+        configuration:
+          affinityGroup: together
+        execution:
+          onExecute:
+            - mkdir $MY_DIR
+            - echo "Running " $pipeline_name "|"
+      - name: bad
+        type: Bash
+        configuration:
+          affinityGroup: together
+          inputSteps:
+            - name: ag_step_1
+        execution:
+          onExecute:
+            - echo "Running " $pipeline_name "|"
+      - name: ag_step_3
+        type: Bash
+        configuration:
+          affinityGroup: together
+          inputSteps:
+            - name: bad
+        execution:
+          onExecute:
+            - echo "Running " $pipeline_name "|"
+      {{ end }}
