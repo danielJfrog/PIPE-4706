@@ -5,7 +5,8 @@ pipelines:
         readOnly:
           MY_DIR: "/tmpdir"
     steps:
-      - name: ag_step_1
+      {{ range $i, $e := until 2 }}
+      - name: ag_step_{{$i}}
         type: Bash
         configuration:
           affinityGroup: together
@@ -31,3 +32,4 @@ pipelines:
         execution:
           onExecute:
             - echo "Running " $pipeline_name "|"
+      {{ end }}
