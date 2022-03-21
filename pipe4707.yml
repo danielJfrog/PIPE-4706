@@ -15,7 +15,7 @@ pipelines:
             - cat $MY_DIR/myoutput.txt
             - echo "new daniel" > cachefile.txt
             - add_pipeline_files cachefile.txt my_file
-      - name: bad
+      - name: bad_{{$i}}
         type: Bash
         configuration:
           inputSteps:
