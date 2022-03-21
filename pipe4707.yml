@@ -5,7 +5,7 @@ pipelines:
         readOnly:
           MY_DIR: "/tmpdir"
     steps:
-      - name: ag_step_{{$i}}
+      - name: ag_step
         type: Bash
         execution:
           onExecute:
