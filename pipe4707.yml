@@ -14,7 +14,7 @@ pipelines:
             - cat $MY_DIR/myoutput.txt
             - echo "new daniel" > cachefile.txt
             - add_pipeline_files cachefile.txt my_file
-      {{ range $i, $e := until 5 }}
+    {{ range $i, $e := until 5 }}
       - name: ag_step_{{$i}}
         type: Bash
         configuration:
@@ -27,4 +27,4 @@ pipelines:
             - cat $MY_DIR/myoutput.txt
             - echo "new daniel" > cachefile.txt
             - add_pipeline_files cachefile.txt my_file
-      {{ end }}
+    {{ end }}
