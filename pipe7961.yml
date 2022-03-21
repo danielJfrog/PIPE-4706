@@ -1,23 +1,33 @@
-resources:
-  {{ range $i, $e := until 5 }}
-  - name: monitor_cron_trigger{{$i}}
-    type: CronTrigger
-    configuration:
-      interval: '*/5 * * * *' # Every 5 minutes
-  {{ end }}
-
 pipelines:
-  - name: testcron
+  - name: pipeline_7961
+    configuration:
+      environmentVariables:
+        readOnly:
+          MY_DIR: "/tmpdir"
     steps:
-      - name: basic
+      - name: ag_step_1
         type: Bash
         configuration:
-          runtime:
-            type: host
-          inputResources:
-          {{ range $i, $e := until 5 }}
-          - name: monitor_cron_trigger{{$i}}
-          {{ end }}
+          affinityGroup: together
         execution:
           onExecute:
-            - echo hi
+            - mkdir $MY_DIR
+            - echo "Running " $pipeline_name "|"
+      - name: bad
+        type: Bash
+        configuration:
+          affinityGroup: together
+          inputSteps:
+            - name: ag_step_1
+        execution:
+          onExecute:
+            - echo "Running " $pipeline_name "|"
+      - name: ag_step_3
+        type: Bash
+        configuration:
+          affinityGroup: together
+          inputSteps:
+            - name: bad
+        execution:
+          onExecute:
+            - echo "Running " $pipeline_name "|"
